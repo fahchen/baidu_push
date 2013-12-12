@@ -1,5 +1,6 @@
 require "baidu_push/version"
 
 module BaiduPush
-  # Your code goes here...
+  autoload :Client, 'baidu_push/client'
+  autoload :Request, 'baidu_push/request'
 end
