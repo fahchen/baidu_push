@@ -12,7 +12,7 @@ module BaiduPush
     attr_accessor :options
 
     def initialize(api_key, secret_key, options = {})
-      @api_key, @secret_key = api_key.strip, secret_key.strip
+      @api_key, @secret_key = (api_key || '').strip, (secret_key || '').strip
       @options = DEFAULT_OPTIONS.merge options
 
       set_api_url
