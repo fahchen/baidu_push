@@ -8,7 +8,7 @@ module BaiduPush
       api_version: '2.0'
     }
 
-    attr_reader :api_key, :secret_key, :api_url
+    attr_reader :api_key, :secret_key, :api_url, :request
     attr_accessor :options
 
     def initialize(api_key, secret_key, options = {})
@@ -16,6 +16,11 @@ module BaiduPush
       @options = DEFAULT_OPTIONS.merge options
 
       set_api_url
+      @request = Request.new(self)
+    end
+
+    def query_bindlist(channel_id = 'channel')
+      @request.fetch(:query_bindlist, channel_id)
     end
 
     private
