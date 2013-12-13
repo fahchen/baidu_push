@@ -3,6 +3,7 @@ require 'spec_helper'
 describe BaiduPush::Client do
   let(:api_key) { 'api_key' }
   let(:secret_key) { 'secret_key' }
+  let(:resource) { 'channel_id' }
   let(:client) do
     BaiduPush::Client.new(api_key,
                           secret_key)
@@ -32,7 +33,7 @@ describe BaiduPush::Client do
       client.should respond_to(:query_bindlist)
     end
     it 'should not raise error' do
-      client.query_bindlist('channel_id')
+      client.query_bindlist(limit: 1)
     end
   end
 
@@ -42,6 +43,16 @@ describe BaiduPush::Client do
     end
     it 'should not raise error' do
       client.request
+    end
+  end
+
+  context 'resource' do
+    it 'should return default resource' do
+      client.resource.should == 'channel'
+    end
+    it 'should update resource' do
+      client.resource = resource
+      client.resource.should == resource
     end
   end
 

@@ -8,7 +8,7 @@ module BaiduPush
 
     HTTP_METHOD = :post
 
-    attr_reader :client, :resource
+    attr_reader :client
 
     def initialize(client)
       @client = client
@@ -16,8 +16,7 @@ module BaiduPush
       set_base_uri
     end
 
-    def fetch(method, resource = 'channel', params = {})
-      @resource = resource.to_s.strip
+    def fetch(method, params = {})
       params.merge!({method: method,
                      apikey: @client.api_key,
                      timestamp: Time.now.to_i})
@@ -25,12 +24,12 @@ module BaiduPush
       params.merge!({ sign: sign })
 
       options = { body: params }
-      self.class.send(HTTP_METHOD, "/#{@resource}", options)
+      self.class.send(HTTP_METHOD, "/#{@client.resource}", options)
     end
 
     def generate_sign(sign_params)
       params_string = sign_params.sort.map{ |h| h.join('=') }.join
-      gather = "#{HTTP_METHOD.to_s.upcase}#{self.class.base_uri}/#{@resource}#{params_string}#{@client.secret_key}"
+      gather = "#{HTTP_METHOD.to_s.upcase}#{self.class.base_uri}/#{@client.resource}#{params_string}#{@client.secret_key}"
 
       Digest::MD5.hexdigest(URI::encode_www_form_component(gather))
     end

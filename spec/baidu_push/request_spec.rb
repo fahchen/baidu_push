@@ -41,8 +41,8 @@ describe BaiduPush::Request do
     end
     it 'should not raise error when fetch' do
       @request.fetch(@method)
-      @request.fetch(@method, 'channel_id')
-      @request.fetch(@method, 'channel_id', k: 'v')
+      @request.fetch(@method)
+      @request.fetch(@method, k: 'v')
     end
   end
 end
