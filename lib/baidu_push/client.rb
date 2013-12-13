@@ -21,6 +21,9 @@ module BaiduPush
       @request = Request.new(self)
     end
 
+    ###################################################
+    # Basic API
+    #
     def query_bindlist(params = {})
       @request.fetch(:query_bindlist, params)
     end
@@ -33,6 +36,31 @@ module BaiduPush
       })
       @request.fetch(:push_msg, params)
     end
+
+    def init_app_ioscert(name, description, release_cert, dev_cert, params = {})
+      params.merge!({
+        name: name,
+        description: description,
+        release_cert: release_cert,
+        dev_cert: dev_cert
+      })
+      @request.fetch(:init_app_ioscert, params)
+    end
+
+    def update_app_ioscert(params = {})
+      @request.fetch(:update_app_ioscert, params)
+    end
+
+    def delete_app_ioscert(params = {})
+      @request.fetch(:delete_app_ioscert, params)
+    end
+
+    def query_app_ioscert(params = {})
+      @request.fetch(:query_app_ioscert, params)
+    end
+    #
+    # Basic API
+    ###################################################
 
     private
     def set_api_url
