@@ -46,13 +46,30 @@ describe BaiduPush::Client do
     end
   end
 
-  context 'resource' do
+  context '#resource' do
     it 'should return default resource' do
       client.resource.should == 'channel'
     end
     it 'should update resource' do
       client.resource = resource
       client.resource.should == resource
+    end
+  end
+
+  context '#push_msg' do
+    before(:each) do
+      @push_type = 1
+      @messages = {
+        title: 'title',
+        description: 'description'
+      }
+      @msg_keys = 'key'
+    end
+    it 'should respond_to' do
+      client.should respond_to(:push_msg)
+    end
+    it 'should not raise error' do
+      client.push_msg @push_msg, @messages, @msg_keys
     end
   end
 

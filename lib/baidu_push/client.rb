@@ -25,6 +25,15 @@ module BaiduPush
       @request.fetch(:query_bindlist, params)
     end
 
+    def push_msg(push_type, messages, msg_keys, params = {})
+      params.merge!({
+        push_type: push_type,
+        messages: messages.to_json,
+        msg_keys: msg_keys
+      })
+      @request.fetch(:push_msg, params)
+    end
+
     private
     def set_api_url
       scheme = @options[:use_ssl] ? 'https' : 'http'
