@@ -62,6 +62,70 @@ module BaiduPush
     # Basic API
     ###################################################
 
+    ###################################################
+    # Advanced API
+    #
+    def verify_bind(user_id, params = {})
+      params.merge!({
+        user_id: user_id
+      })
+      @request.fetch(:verify_bind, params)
+    end
+
+    def fetch_msg(user_id, params = {})
+      params.merge!({
+        user_id: user_id
+      })
+      @request.fetch(:fetch_msg, params)
+    end
+
+    def fetch_msgcount(user_id, params = {})
+      params.merge!({
+        user_id: user_id
+      })
+      @request.fetch(:fetch_msgcount, params)
+    end
+
+    def delete_msg(user_id, msg_ids, params = {})
+      params.merge!({
+        user_id: user_id,
+        msg_ids: msg_ids.to_json
+      })
+      @request.fetch(:delete_msg, params)
+    end
+
+    def set_tag(tag, params = {})
+      params.merge!({
+        tag: tag
+      })
+      @request.fetch(:set_tag, params)
+    end
+
+    def fetch_tag(params = {})
+      @request.fetch(:fetch_tag, params)
+    end
+
+    def delete_tag(tag, params = {})
+      params.merge!({
+        tag: tag
+      })
+      @request.fetch(:delete_tag, params)
+    end
+
+    def query_user_tags(user_id, params = {})
+      params.merge!({
+        user_id: user_id
+      })
+      @request.fetch(:query_user_tags, params)
+    end
+
+    def query_device_type(params = {})
+      @request.fetch(:query_device_type, params)
+    end
+    #
+    # Advanced API
+    ###################################################
+
     private
     def set_api_url
       scheme = @options[:use_ssl] ? 'https' : 'http'
