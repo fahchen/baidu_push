@@ -29,6 +29,7 @@ module BaiduPush
     end
 
     def push_msg(push_type, messages, msg_keys, params = {})
+      set_to_default_resource
       params.merge!({
         push_type: push_type,
         messages: messages.to_json,
@@ -95,6 +96,7 @@ module BaiduPush
     end
 
     def set_tag(tag, params = {})
+      set_to_default_resource
       params.merge!({
         tag: tag
       })
@@ -102,10 +104,12 @@ module BaiduPush
     end
 
     def fetch_tag(params = {})
+      set_to_default_resource
       @request.fetch(:fetch_tag, params)
     end
 
     def delete_tag(tag, params = {})
+      set_to_default_resource
       params.merge!({
         tag: tag
       })
@@ -113,6 +117,7 @@ module BaiduPush
     end
 
     def query_user_tags(user_id, params = {})
+      set_to_default_resource
       params.merge!({
         user_id: user_id
       })
@@ -130,6 +135,10 @@ module BaiduPush
     def set_api_url
       scheme = @options[:use_ssl] ? 'https' : 'http'
       @api_url = "#{scheme}://#{API_HOST}/rest/#{@options[:api_version]}/channel"
+    end
+
+    def set_to_default_resource
+      @resource = DEFAULT_RESOURCE
     end
   end
 end
