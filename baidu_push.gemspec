@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.email         = ['dev.fah@gmail.com']
   spec.description   = %q{The ruby wrapper of baidu push.}
   spec.summary       = %q{The ruby wrapper of baidu push.}
-  spec.homepage      = ''
+  spec.homepage      = 'https://github.com/fahchen/baidu_push/'
   spec.license       = 'MIb'
 
   spec.files         = `git ls-files`.split($/)
@@ -23,5 +23,5 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'rspec'
   spec.add_development_dependency 'webmock'
 
-  spec.add_dependency 'httparty', ['>= 0.12.0']
+  spec.add_dependency 'httparty', ['>= 0.11.0']
 end
